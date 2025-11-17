@@ -19,12 +19,18 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
     container_name: php_laravel
     volumes:
-      - ./:/var/www/html/servico-laravel
-    working_dir: /var/www/html/servico-laravel/src
+      - ./src:/var/www
+    environment:
+      - PHP_FPM_LISTEN=0.0.0.0:9000
     networks:
       - app-network
+    restart: unless-stopped
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
 
   postgres:
     image: postgres:16
@@ -37,6 +43,10 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    command: >
+      postgres 
+      -c listen_addresses='*'
+      -c max_connections=100
     networks:
       - app-network
 

@@ -96,5 +96,6 @@ Route::patch('doacoes/{id}/entregar', [DoacaoController::class, 'registrarEntreg
 Route::patch('doacoes/{id}/cancelar', [DoacaoController::class, 'cancelar']);
 
 // Itens de Doação
+Route::get('tipos-item', [ItemDoacaoController::class, 'listarTiposItem']);
 Route::get('doacoes/{doacaoId}/itens', [ItemDoacaoController::class, 'listarPorDoacao']);
 Route::apiResource('itens-doacao', ItemDoacaoController::class);

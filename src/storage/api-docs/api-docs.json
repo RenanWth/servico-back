@@ -1237,6 +1237,68 @@
                 }
             }
         },
+        "/api/tipos-item": {
+            "get": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Lista todos os tipos de item disponíveis para doações",
+                "operationId": "86d7aff5ee8ce0ec85773e3595809878",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos de item",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nome": {
+                                                        "type": "string",
+                                                        "example": "Alimento não perecível"
+                                                    },
+                                                    "descricao": {
+                                                        "type": "string",
+                                                        "example": "Alimentos que não estragam facilmente",
+                                                        "nullable": true
+                                                    },
+                                                    "unidade_medida": {
+                                                        "type": "string",
+                                                        "example": "kg",
+                                                        "nullable": true
+                                                    },
+                                                    "categoria": {
+                                                        "type": "string",
+                                                        "example": "Alimentos",
+                                                        "nullable": true
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/doacoes/{doacaoId}/itens": {
             "get": {
                 "tags": [

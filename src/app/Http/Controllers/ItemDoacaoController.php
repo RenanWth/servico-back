@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ItemDoacaoService;
+use App\Models\TipoItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
@@ -13,6 +14,48 @@ class ItemDoacaoController extends Controller
     public function __construct(
         private ItemDoacaoService $itemService
     ) {}
+
+    #[OA\Get(
+        path: '/api/tipos-item',
+        summary: 'Lista todos os tipos de item disponíveis para doações',
+        tags: ['Itens de Doação'],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Lista de tipos de item',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(
+                            property: 'data',
+                            type: 'array',
+                            items: new OA\Items(
+                                type: 'object',
+                                properties: [
+                                    new OA\Property(property: 'id', type: 'integer', example: 1),
+                                    new OA\Property(property: 'nome', type: 'string', example: 'Alimento não perecível'),
+                                    new OA\Property(property: 'descricao', type: 'string', nullable: true, example: 'Alimentos que não estragam facilmente'),
+                                    new OA\Property(property: 'unidade_medida', type: 'string', nullable: true, example: 'kg'),
+                                    new OA\Property(property: 'categoria', type: 'string', nullable: true, example: 'Alimentos'),
+                                    new OA\Property(property: 'created_at', type: 'string', format: 'date-time'),
+                                    new OA\Property(property: 'updated_at', type: 'string', format: 'date-time')
+                                ]
+                            )
+                        )
+                    ]
+                )
+            )
+        ]
+    )]
+    public function listarTiposItem(): JsonResponse
+    {
+        try {
+            $tiposItem = TipoItem::orderBy('nome')->get();
+            return response()->json(['data' => $tiposItem], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 
     #[OA\Get(
         path: '/api/doacoes/{doacaoId}/itens',

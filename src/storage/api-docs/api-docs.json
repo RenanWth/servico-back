@@ -1,0 +1,3943 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Serviço Backend",
+        "description": "API RESTful para gerenciamento de serviços comunitários, incluindo pessoas, perfis, missões, notícias e doações.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/candidaturas-missao": {
+            "get": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Lista todas as candidaturas",
+                "operationId": "c2f8aacfbb0b3270263550a156a8c78c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de candidaturas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Cria uma nova candidatura",
+                "operationId": "23773ea8e969c4319686abd2e14a4e4e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "missao_id",
+                                    "voluntario_id"
+                                ],
+                                "properties": {
+                                    "missao_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "voluntario_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Candidatura criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/missoes/{missaoId}/candidaturas": {
+            "get": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Lista candidaturas de uma missão",
+                "operationId": "4d1f5bf29f2e594af97b256e102b9678",
+                "parameters": [
+                    {
+                        "name": "missaoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de candidaturas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/{voluntarioId}/candidaturas": {
+            "get": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Lista candidaturas de um voluntário",
+                "operationId": "5fc4091c105f1805db2f94a3e209a9af",
+                "parameters": [
+                    {
+                        "name": "voluntarioId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de candidaturas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/candidaturas-missao/{id}": {
+            "get": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Busca candidatura por ID",
+                "operationId": "957478c85efd0a1e8a8c8fe6ceace401",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Candidatura encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Candidatura não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Exclui uma candidatura",
+                "operationId": "c3d02f93e39d97ed2b7b4af47d847d40",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Candidatura excluída"
+                    },
+                    "404": {
+                        "description": "Candidatura não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/candidaturas-missao/{id}/aprovar": {
+            "patch": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Aprova uma candidatura",
+                "operationId": "f0cd56ab4abc79db836bfe070f4ddd47",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Candidatura aprovada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Candidatura não encontrada"
+                    },
+                    "409": {
+                        "description": "Missão não possui mais vagas disponíveis"
+                    }
+                }
+            }
+        },
+        "/api/candidaturas-missao/{id}/rejeitar": {
+            "patch": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Rejeita uma candidatura",
+                "operationId": "fd12535a9e08c396eb4e9c0ab3ae8d22",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "obs": {
+                                        "type": "string",
+                                        "example": "Motivo da rejeição"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Candidatura rejeitada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Candidatura não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/candidaturas-missao/{id}/concluir": {
+            "patch": {
+                "tags": [
+                    "Candidaturas"
+                ],
+                "summary": "Conclui uma candidatura com avaliação",
+                "operationId": "6f1d26cd96761f808f00b700282eafb2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "avaliacao": {
+                                        "description": "Avaliação de 1 a 5",
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "obs_avaliacao": {
+                                        "type": "string",
+                                        "example": "Observações da avaliação"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Candidatura concluída",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Candidatura não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/doacoes": {
+            "get": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Lista todas as doações",
+                "operationId": "d45234543f9478fc883dc0f9f3628832",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de doações",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Cria uma nova doação com itens",
+                "operationId": "a58c9fb125504319d52b2934767d8d66",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "pessoa_id",
+                                    "ponto_coleta_id",
+                                    "itens"
+                                ],
+                                "properties": {
+                                    "pessoa_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "ponto_coleta_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "pendente"
+                                    },
+                                    "obs": {
+                                        "type": "string",
+                                        "example": "Observações da doação"
+                                    },
+                                    "itens": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "tipo_item_id",
+                                                "quantidade"
+                                            ],
+                                            "properties": {
+                                                "tipo_item_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "quantidade": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 10.5
+                                                },
+                                                "obs": {
+                                                    "type": "string",
+                                                    "example": "Observação do item"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Doação criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/pessoas/{pessoaId}/doacoes": {
+            "get": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Lista doações de uma pessoa",
+                "operationId": "cbdc571bee21b608ddeb642a20d8d65d",
+                "parameters": [
+                    {
+                        "name": "pessoaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de doações",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/{pontoId}/doacoes": {
+            "get": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Lista doações de um ponto",
+                "operationId": "939986c6f14df2486bbc184c861bfdcd",
+                "parameters": [
+                    {
+                        "name": "pontoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de doações",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/doacoes/{id}": {
+            "get": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Busca doação por ID",
+                "operationId": "c48cacc86a76b29fafc6b55b69a19266",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Doação encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doação não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Atualiza uma doação",
+                "operationId": "95aa56546f46333b20891a38fa509dbd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "obs": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Doação atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doação não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Exclui uma doação",
+                "operationId": "a17536f8bdcc18478d7c5182a158b559",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Doação excluída"
+                    },
+                    "404": {
+                        "description": "Doação não encontrada"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, doação já foi entregue"
+                    }
+                }
+            }
+        },
+        "/api/doacoes/{id}/entregar": {
+            "patch": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Registra entrega da doação",
+                "operationId": "1f999bf3cfcd5d5548ad962bd382dded",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entrega registrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doação não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/doacoes/{id}/cancelar": {
+            "patch": {
+                "tags": [
+                    "Doações"
+                ],
+                "summary": "Cancela uma doação",
+                "operationId": "2b509e6faf1d3e19a099a1a9447e0760",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Doação cancelada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doação não encontrada"
+                    },
+                    "409": {
+                        "description": "Não é possível cancelar, doação já foi entregue"
+                    }
+                }
+            }
+        },
+        "/api/pessoas/{pessoaId}/enderecos": {
+            "get": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Lista endereços de uma pessoa",
+                "operationId": "cf6159e1b940772298f30d6514707a6e",
+                "parameters": [
+                    {
+                        "name": "pessoaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de endereços",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/enderecos/{id}": {
+            "get": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Busca endereço por ID",
+                "operationId": "04f205c824b703870cfdbbbcf75cc3f3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Endereço encontrado"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Atualiza um endereço",
+                "operationId": "5aac4f6f8753fbad5804363cd0f793f1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cep": {
+                                        "type": "string"
+                                    },
+                                    "logradouro": {
+                                        "type": "string"
+                                    },
+                                    "numero": {
+                                        "type": "string"
+                                    },
+                                    "complemento": {
+                                        "type": "string"
+                                    },
+                                    "bairro": {
+                                        "type": "string"
+                                    },
+                                    "principal": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Endereço atualizado"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Exclui um endereço",
+                "operationId": "9f4f92c7f07c1b2f09355a725a9d51cc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Endereço excluído"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/enderecos": {
+            "post": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Cria um novo endereço",
+                "operationId": "7503e124e0fd8144c6a9901d2e08bb19",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "pessoa_id",
+                                    "cep",
+                                    "logradouro",
+                                    "numero",
+                                    "bairro"
+                                ],
+                                "properties": {
+                                    "pessoa_id": {
+                                        "type": "integer"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "95900-000"
+                                    },
+                                    "logradouro": {
+                                        "type": "string",
+                                        "example": "Rua Principal"
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123"
+                                    },
+                                    "complemento": {
+                                        "type": "string",
+                                        "example": "Apto 101"
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro"
+                                    },
+                                    "principal": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Endereço criado"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/enderecos/{id}/principal": {
+            "patch": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Define endereço como principal",
+                "operationId": "1c766ee52fcba373349c3faa724b1711",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Endereço definido como principal"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/noticias/{noticiaId}/imagens": {
+            "get": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Lista imagens de uma notícia",
+                "operationId": "aebffc0327281fb04bbf9deb22f7b564",
+                "parameters": [
+                    {
+                        "name": "noticiaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de imagens",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/imagens-noticia/{id}": {
+            "get": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Busca imagem por ID",
+                "operationId": "f2ee2788e31ab21c336c45f523c95e46",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Imagem encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Imagem não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Atualiza uma imagem",
+                "operationId": "398a6cd1212efab24e09ce910c648990",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "legenda": {
+                                        "type": "string"
+                                    },
+                                    "ordem": {
+                                        "type": "integer"
+                                    },
+                                    "principal": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Imagem atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Imagem não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Exclui uma imagem",
+                "operationId": "ab886b1079fa67ecd2976c5f53d4ce15",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Imagem excluída"
+                    },
+                    "404": {
+                        "description": "Imagem não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/imagens-noticia": {
+            "post": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Cria uma nova imagem",
+                "operationId": "954eebf8300163bb80db34e8c38dd265",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "noticia_id",
+                                    "url"
+                                ],
+                                "properties": {
+                                    "noticia_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://example.com/imagem.jpg"
+                                    },
+                                    "legenda": {
+                                        "type": "string",
+                                        "example": "Legenda da imagem"
+                                    },
+                                    "ordem": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "principal": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Imagem criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/imagens-noticia/{id}/principal": {
+            "patch": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Define imagem como principal",
+                "operationId": "72fbf9e221236bd95595361b298d8885",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Imagem definida como principal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Imagem não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/imagens-noticia/reordenar": {
+            "post": {
+                "tags": [
+                    "Imagens"
+                ],
+                "summary": "Reordena imagens de uma notícia",
+                "operationId": "2449b10f4b691f737b70f1dbecb02e69",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "noticia_id",
+                                    "ordens"
+                                ],
+                                "properties": {
+                                    "noticia_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "ordens": {
+                                        "type": "object",
+                                        "example": {
+                                            "1": 1,
+                                            "2": 2,
+                                            "3": 3
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Imagens reordenadas"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/doacoes/{doacaoId}/itens": {
+            "get": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Lista itens de uma doação",
+                "operationId": "9022b53db5e256f627253afab1414806",
+                "parameters": [
+                    {
+                        "name": "doacaoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de itens",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itens-doacao/{id}": {
+            "get": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Busca item por ID",
+                "operationId": "e733cd28bd6340fa4f74738e62934af6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Item não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Atualiza um item de doação",
+                "operationId": "b47b622b21dff6432c59a703bad0d91d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tipo_item_id": {
+                                        "type": "integer"
+                                    },
+                                    "quantidade": {
+                                        "type": "number"
+                                    },
+                                    "obs": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Item não encontrado"
+                    },
+                    "409": {
+                        "description": "Não é possível alterar, doação já foi entregue"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Exclui um item de doação",
+                "operationId": "c32259d1b7755b5a0dc279a35cbd65b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Item excluído"
+                    },
+                    "404": {
+                        "description": "Item não encontrado"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, doação já foi entregue"
+                    }
+                }
+            }
+        },
+        "/api/itens-doacao": {
+            "post": {
+                "tags": [
+                    "Itens de Doação"
+                ],
+                "summary": "Cria um novo item de doação",
+                "operationId": "4270730590bd3ef2c89f37f1f8aa9e57",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "doacao_id",
+                                    "tipo_item_id",
+                                    "quantidade"
+                                ],
+                                "properties": {
+                                    "doacao_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tipo_item_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "quantidade": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10.5
+                                    },
+                                    "obs": {
+                                        "type": "string",
+                                        "example": "Observação do item"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Item criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/missoes": {
+            "get": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Lista todas as missões",
+                "operationId": "9d26482c066f6ec7bebc43c8732c87dd",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de missões",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Cria uma nova missão",
+                "operationId": "4830052c507f5a94818288969cd90b7e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titulo",
+                                    "descricao",
+                                    "categoria_id",
+                                    "dt_inicio",
+                                    "dt_fim",
+                                    "vagas_totais",
+                                    "admin_id"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string",
+                                        "example": "Missão de Resgate"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Descrição da missão"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "local_encontro": {
+                                        "type": "string",
+                                        "example": "Praça Central"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -29.4669
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -51.9644
+                                    },
+                                    "dt_inicio": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-12-01 08:00:00"
+                                    },
+                                    "dt_fim": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-12-01 18:00:00"
+                                    },
+                                    "vagas_totais": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "ativa"
+                                    },
+                                    "admin_id": {
+                                        "description": "ID do administrador criador",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Missão criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/missoes/status/{status}": {
+            "get": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Lista missões por status",
+                "operationId": "a1199d71fe0ae1602d57d120502281b5",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de missões",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/missoes/categoria/{categoriaId}": {
+            "get": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Lista missões por categoria",
+                "operationId": "e06c49ff3a05af2797385e190f7de032",
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de missões",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/missoes/disponiveis": {
+            "get": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Lista missões com vagas disponíveis",
+                "operationId": "2377604396b679fd4f2990cca7e557f7",
+                "responses": {
+                    "200": {
+                        "description": "Lista de missões disponíveis",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/missoes/{id}": {
+            "get": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Busca missão por ID",
+                "operationId": "e1d2eda2ed8113e5f852d106211cad8e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Missão encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Missão não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Atualiza uma missão",
+                "operationId": "89e91788b7426493276120184efdcce6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer"
+                                    },
+                                    "local_encontro": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "number"
+                                    },
+                                    "longitude": {
+                                        "type": "number"
+                                    },
+                                    "dt_inicio": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "dt_fim": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "vagas_totais": {
+                                        "type": "integer"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Missão atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Missão não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Exclui uma missão",
+                "operationId": "3b3b97819f173896165a7751940e8a2e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Missão excluída"
+                    },
+                    "404": {
+                        "description": "Missão não encontrada"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem candidaturas vinculadas"
+                    }
+                }
+            }
+        },
+        "/api/missoes/{id}/finalizar": {
+            "patch": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Finaliza uma missão",
+                "operationId": "c3d857ea9b4c685c3c168cb3771a86c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Missão finalizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Missão não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/missoes/{id}/cancelar": {
+            "patch": {
+                "tags": [
+                    "Missões"
+                ],
+                "summary": "Cancela uma missão",
+                "operationId": "398c684c4cde065b69809752e9f23ae4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Missão cancelada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Missão não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/{pontoId}/necessidades": {
+            "get": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Lista necessidades de um ponto",
+                "operationId": "29ce0234f17232d0831cdd8c9efe262a",
+                "parameters": [
+                    {
+                        "name": "pontoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de necessidades",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/necessidades-ponto": {
+            "get": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Lista todas as necessidades",
+                "operationId": "9babf62821c3f0226fa701503c19a342",
+                "responses": {
+                    "200": {
+                        "description": "Lista de necessidades",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Cria uma nova necessidade",
+                "operationId": "ea3e3efa9d2939d04220a809ebd5bf67",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "ponto_coleta_id",
+                                    "tipo_item_id",
+                                    "quantidade_necessaria"
+                                ],
+                                "properties": {
+                                    "ponto_coleta_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tipo_item_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "quantidade_necessaria": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100
+                                    },
+                                    "prioridade": {
+                                        "type": "string",
+                                        "enum": [
+                                            "baixa",
+                                            "media",
+                                            "alta"
+                                        ],
+                                        "example": "alta"
+                                    },
+                                    "ativo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Necessidade criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/necessidades-ponto/ativas": {
+            "get": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Lista apenas necessidades ativas",
+                "operationId": "274da5d5e690b0ece5a6e7f658334630",
+                "responses": {
+                    "200": {
+                        "description": "Lista de necessidades ativas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/necessidades-ponto/{id}": {
+            "get": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Busca necessidade por ID",
+                "operationId": "c8cf3aecd035ec7588ff1f871d458422",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Necessidade encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Necessidade não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Atualiza uma necessidade",
+                "operationId": "2cdf84b01ad167a3250610e27a5513fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "quantidade_necessaria": {
+                                        "type": "number"
+                                    },
+                                    "quantidade_recebida": {
+                                        "type": "number"
+                                    },
+                                    "prioridade": {
+                                        "type": "string"
+                                    },
+                                    "ativo": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Necessidade atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Necessidade não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Exclui uma necessidade",
+                "operationId": "ac292072fea438634210f9ccd9099ee0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Necessidade excluída"
+                    },
+                    "404": {
+                        "description": "Necessidade não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/necessidades-ponto/{id}/ativar": {
+            "patch": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Ativa uma necessidade",
+                "operationId": "a029270a508e80856f524e8c7a469c70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Necessidade ativada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Necessidade não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/necessidades-ponto/{id}/desativar": {
+            "patch": {
+                "tags": [
+                    "Necessidades"
+                ],
+                "summary": "Desativa uma necessidade",
+                "operationId": "04b55407917e9cb598a937463dd3a87c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Necessidade desativada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Necessidade não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/noticias": {
+            "get": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Lista todas as notícias",
+                "operationId": "914e63ade6e06a3fc689556f6c295245",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "categoria_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "destaque",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de notícias",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Cria uma nova notícia",
+                "operationId": "8f1e4f67dea603a29aa7c4817f7810ea",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titulo",
+                                    "conteudo",
+                                    "categoria_id",
+                                    "admin_id"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string",
+                                        "example": "Título da notícia"
+                                    },
+                                    "subtitulo": {
+                                        "type": "string",
+                                        "example": "Subtítulo da notícia"
+                                    },
+                                    "conteudo": {
+                                        "type": "string",
+                                        "example": "Conteúdo completo da notícia"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "destaque": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "rascunho"
+                                    },
+                                    "admin_id": {
+                                        "description": "ID do administrador autor",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notícia criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/noticias/publicadas": {
+            "get": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Lista apenas notícias publicadas",
+                "operationId": "e0f29148c0f4d8886bf9cbb48c3d4851",
+                "responses": {
+                    "200": {
+                        "description": "Lista de notícias publicadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/noticias/destaque": {
+            "get": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Lista notícias em destaque",
+                "operationId": "388c5725f9c72232b9ed226da8f93e47",
+                "responses": {
+                    "200": {
+                        "description": "Lista de notícias em destaque",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/noticias/categoria/{categoriaId}": {
+            "get": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Lista notícias por categoria",
+                "operationId": "4149fa1cbbdaa0d9771c60c0e1b59f8a",
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de notícias",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/noticias/{id}": {
+            "get": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Busca notícia por ID",
+                "operationId": "ce8296da4c297f04ae5dd0493b9c28b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notícia encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Atualiza uma notícia",
+                "operationId": "5b09bf8daeef7b4b31b386dd7d814079",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string"
+                                    },
+                                    "subtitulo": {
+                                        "type": "string"
+                                    },
+                                    "conteudo": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer"
+                                    },
+                                    "destaque": {
+                                        "type": "boolean"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Notícia atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Exclui uma notícia",
+                "operationId": "fdd8118e7eb14c73fa335c678da6b85a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Notícia excluída"
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem imagens vinculadas"
+                    }
+                }
+            }
+        },
+        "/api/noticias/{id}/publicar": {
+            "patch": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Publica uma notícia",
+                "operationId": "d6546b9fdb282b09806bc641583ea31f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notícia publicada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/noticias/{id}/destaque": {
+            "patch": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Define notícia como destaque",
+                "operationId": "d63aac74335ad2efcf39686129153d59",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "destaque"
+                                ],
+                                "properties": {
+                                    "destaque": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Destaque atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/noticias/{id}/visualizacao": {
+            "patch": {
+                "tags": [
+                    "Notícias"
+                ],
+                "summary": "Incrementa contador de visualizações",
+                "operationId": "17748daa6e8265d959c9464e1336a745",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Visualização incrementada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notícia não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/perfis": {
+            "get": {
+                "tags": [
+                    "Perfis"
+                ],
+                "summary": "Lista todos os perfis",
+                "operationId": "c81e2826c91f75ac01a11c02c719ef50",
+                "responses": {
+                    "200": {
+                        "description": "Lista de perfis retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Perfis"
+                ],
+                "summary": "Cria um novo perfil",
+                "operationId": "f9ae9bf070c1fd189bb553668648b676",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "ADMIN"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Administrador do sistema"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Perfil criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/perfis/{id}": {
+            "get": {
+                "tags": [
+                    "Perfis"
+                ],
+                "summary": "Busca perfil por ID",
+                "operationId": "140b42070528553a5a5bb773ddf468e4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do perfil",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Perfil encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Perfil não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Perfis"
+                ],
+                "summary": "Atualiza um perfil",
+                "operationId": "562461cea21af54561cccd85425634d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Perfil atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Perfil não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Perfis"
+                ],
+                "summary": "Exclui um perfil",
+                "operationId": "de3cfadb8c341949bd752e3381ceabf0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Perfil excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Perfil não encontrado"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem pessoas vinculadas"
+                    }
+                }
+            }
+        },
+        "/api/pessoas": {
+            "get": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Lista todas as pessoas",
+                "operationId": "7c7d2c9decc48109bcd470035e629ecb",
+                "parameters": [
+                    {
+                        "name": "ativo",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "perfil_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de pessoas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Cria uma nova pessoa",
+                "operationId": "b72258a0649966eb7cb39a9fdc67bf4b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome_completo",
+                                    "perfil_id"
+                                ],
+                                "properties": {
+                                    "nome_completo": {
+                                        "type": "string",
+                                        "example": "João Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456.789-00"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "joao@example.com"
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "(51) 99999-9999"
+                                    },
+                                    "dt_nascimento": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "genero": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "perfil_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "ativo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pessoa criada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/pessoas/ativas": {
+            "get": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Lista apenas pessoas ativas",
+                "operationId": "f8de7e359da1c8db641a75f74f051933",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pessoas ativas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pessoas/{id}": {
+            "get": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Busca pessoa por ID",
+                "operationId": "9767860b5875b66fc3535a00d47aec2d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pessoa encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pessoa não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Atualiza uma pessoa",
+                "operationId": "da7d1255c980a411d322994cbca98632",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome_completo": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "telefone": {
+                                        "type": "string"
+                                    },
+                                    "dt_nascimento": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "genero": {
+                                        "type": "string"
+                                    },
+                                    "perfil_id": {
+                                        "type": "integer"
+                                    },
+                                    "ativo": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pessoa atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pessoa não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Exclui uma pessoa",
+                "operationId": "6ac497549c4c86a2d7bbd144d43dffb3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Pessoa excluída"
+                    },
+                    "404": {
+                        "description": "Pessoa não encontrada"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem relacionamentos"
+                    }
+                }
+            }
+        },
+        "/api/pessoas/{id}/ativar": {
+            "patch": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Ativa uma pessoa",
+                "operationId": "2079c342117f80d10bce9fda83135d06",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pessoa ativada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pessoa não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/pessoas/{id}/desativar": {
+            "patch": {
+                "tags": [
+                    "Pessoas"
+                ],
+                "summary": "Desativa uma pessoa",
+                "operationId": "e7cdc937f36ef08dc9c83cc6be5696ec",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pessoa desativada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pessoa não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta": {
+            "get": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Lista todos os pontos de coleta",
+                "operationId": "b790d3f1404f7ba0b74f80be91c4236d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pontos de coleta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Cria um novo ponto de coleta",
+                "operationId": "90221ae789c9a598adca5bb3cc96983b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "admin_id"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Ponto de Coleta Central"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Descrição do ponto"
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua Principal, 123"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -29.4669
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -51.9644
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "(51) 99999-9999"
+                                    },
+                                    "horario_funcionamento": {
+                                        "type": "string",
+                                        "example": "Segunda a Sexta, 8h às 18h"
+                                    },
+                                    "responsavel_nome": {
+                                        "type": "string",
+                                        "example": "João Silva"
+                                    },
+                                    "responsavel_telefone": {
+                                        "type": "string",
+                                        "example": "(51) 88888-8888"
+                                    },
+                                    "ativo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "admin_id": {
+                                        "description": "ID do administrador criador",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ponto criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/ativos": {
+            "get": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Lista apenas pontos de coleta ativos",
+                "operationId": "26cfaddd934295af3cd0c3f214808584",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pontos ativos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/{id}": {
+            "get": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Busca ponto de coleta por ID",
+                "operationId": "073beac61d42caa18a3ca2294f6c3bc8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ponto encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ponto não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Atualiza um ponto de coleta",
+                "operationId": "505c16853f4505ea3e39ee7c234afc46",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "endereco": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "number"
+                                    },
+                                    "longitude": {
+                                        "type": "number"
+                                    },
+                                    "telefone": {
+                                        "type": "string"
+                                    },
+                                    "horario_funcionamento": {
+                                        "type": "string"
+                                    },
+                                    "responsavel_nome": {
+                                        "type": "string"
+                                    },
+                                    "responsavel_telefone": {
+                                        "type": "string"
+                                    },
+                                    "ativo": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ponto atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ponto não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Exclui um ponto de coleta",
+                "operationId": "081a9482b9f253f6964e4b858b758537",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ponto excluído"
+                    },
+                    "404": {
+                        "description": "Ponto não encontrado"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem relacionamentos"
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/{id}/ativar": {
+            "patch": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Ativa um ponto de coleta",
+                "operationId": "e2961bfbd8a0c72271e27aa8e368cdf1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ponto ativado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ponto não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/pontos-coleta/{id}/desativar": {
+            "patch": {
+                "tags": [
+                    "Pontos de Coleta"
+                ],
+                "summary": "Desativa um ponto de coleta",
+                "operationId": "efdcea8bf934b89f046109ebe9c176fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ponto desativado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ponto não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/voluntarios": {
+            "get": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Lista todos os voluntários",
+                "operationId": "878e7815082720da3ccdb34c46c0bfbd",
+                "responses": {
+                    "200": {
+                        "description": "Lista de voluntários",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Cria um novo voluntário",
+                "operationId": "8d1791e7e868aa63827c8ee949d16768",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "pessoa_id"
+                                ],
+                                "properties": {
+                                    "pessoa_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "escolaridade": {
+                                        "type": "string",
+                                        "example": "Superior completo"
+                                    },
+                                    "profissao": {
+                                        "type": "string",
+                                        "example": "Engenheiro"
+                                    },
+                                    "habilidades": {
+                                        "type": "string",
+                                        "example": "Primeiros socorros, Resgate"
+                                    },
+                                    "disponibilidade": {
+                                        "type": "string",
+                                        "example": "Finais de semana"
+                                    },
+                                    "exp_emergencias": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "cnh_categoria": {
+                                        "type": "string",
+                                        "example": "B"
+                                    },
+                                    "possui_veiculo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "obs": {
+                                        "type": "string",
+                                        "example": "Observações adicionais"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Voluntário criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/status/{status}": {
+            "get": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Lista voluntários por status",
+                "operationId": "187b1d403de66967514e19be347959cc",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pendente",
+                                "aprovado",
+                                "rejeitado"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de voluntários",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/aprovados": {
+            "get": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Lista apenas voluntários aprovados",
+                "operationId": "26b8a225f43c27055756ec43fa8c5828",
+                "responses": {
+                    "200": {
+                        "description": "Lista de voluntários aprovados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/{id}": {
+            "get": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Busca voluntário por ID",
+                "operationId": "f3e073159ec1adc773dde5778f68899d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Voluntário encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voluntário não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Atualiza um voluntário",
+                "operationId": "94042f5ae99c33248d2d8e596c353ae5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "escolaridade": {
+                                        "type": "string"
+                                    },
+                                    "profissao": {
+                                        "type": "string"
+                                    },
+                                    "habilidades": {
+                                        "type": "string"
+                                    },
+                                    "disponibilidade": {
+                                        "type": "string"
+                                    },
+                                    "exp_emergencias": {
+                                        "type": "boolean"
+                                    },
+                                    "cnh_categoria": {
+                                        "type": "string"
+                                    },
+                                    "possui_veiculo": {
+                                        "type": "boolean"
+                                    },
+                                    "obs": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Voluntário atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voluntário não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Exclui um voluntário",
+                "operationId": "17ae5a392f02f172578f0f5ebb7f0d0d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Voluntário excluído"
+                    },
+                    "404": {
+                        "description": "Voluntário não encontrado"
+                    },
+                    "409": {
+                        "description": "Não é possível excluir, existem candidaturas vinculadas"
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/{id}/aprovar": {
+            "patch": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Aprova um voluntário",
+                "operationId": "999c427d7d3195d72fdc0fc9b6ce6847",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Voluntário aprovado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voluntário não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/voluntarios/{id}/rejeitar": {
+            "patch": {
+                "tags": [
+                    "Voluntários"
+                ],
+                "summary": "Rejeita um voluntário",
+                "operationId": "2e13aeaedb8dd3b9828d26fd82a98ac2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "obs": {
+                                        "type": "string",
+                                        "example": "Motivo da rejeição"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Voluntário rejeitado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voluntário não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Perfis",
+            "description": "Gerenciamento de perfis de usuários"
+        },
+        {
+            "name": "Pessoas",
+            "description": "Gerenciamento de pessoas"
+        },
+        {
+            "name": "Endereços",
+            "description": "Gerenciamento de endereços de pessoas"
+        },
+        {
+            "name": "Voluntários",
+            "description": "Gerenciamento de voluntários"
+        },
+        {
+            "name": "Missões",
+            "description": "Gerenciamento de missões"
+        },
+        {
+            "name": "Candidaturas",
+            "description": "Gerenciamento de candidaturas a missões"
+        },
+        {
+            "name": "Notícias",
+            "description": "Gerenciamento de notícias"
+        },
+        {
+            "name": "Imagens",
+            "description": "Gerenciamento de imagens de notícias"
+        },
+        {
+            "name": "Pontos de Coleta",
+            "description": "Gerenciamento de pontos de coleta"
+        },
+        {
+            "name": "Necessidades",
+            "description": "Gerenciamento de necessidades dos pontos de coleta"
+        },
+        {
+            "name": "Doações",
+            "description": "Gerenciamento de doações"
+        },
+        {
+            "name": "Itens de Doação",
+            "description": "Gerenciamento de itens de doação"
+        }
+    ]
+}
